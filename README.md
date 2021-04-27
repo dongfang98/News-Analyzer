@@ -14,11 +14,10 @@
 
 ![preview2](https://user-images.githubusercontent.com/77998865/114019914-8eed3900-98a1-11eb-8b71-324ba022d119.gif)
 
-### My Demo and My Tests
-- Secure file uploader module [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/analyser/Uploader)
-- NLP analysis module [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/analyser/NLPAnalysis)
-- News feed ingester module [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/analyser/NewsIngester)
-- My tests [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/test)
+### My Demo
+- Secure file uploader module [here](https://github.com/dongfang98/News-Analyzer/tree/main/analyser/Uploader)
+- NLP analysis module [here](https://github.com/dongfang98/News-Analyzer/tree/main/analyser/NLPAnalysis)
+- News feed ingester module [here](https://github.com/dongfang98/News-Analyzer/tree/main/analyser/NewsIngester)
 ## Install the .whl file and run the application
 Install the analyser-1.0.0-py3-none-any.whl file in the directory.
 
