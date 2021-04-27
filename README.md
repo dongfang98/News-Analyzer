@@ -1,31 +1,25 @@
 # News-Analyzer
-Three modules:
--  Secure file uploader module
--  NLP analysis module
-- News feed ingester module
-## Secure file uploader module
-A entity-based module.
-### User stories
-- I, an investigator / journalist, want to upload a file to my account on a remote server. 
-- I, an investigator / journalist, want to be able to store metadata and access metadata for each file I store. 
-- I, an investigator / journalist, will have a wide array of data types so I want to be able to upload a wide array of data types.
-- I, an investigator / journalist, will want this system to be secure.
-## NLP analysis module
-A procedure-based module.
-### User stories
-- I, an investigator / journalist, want to be able to run functions that will analyze the text / image data on my stored data (locally or server side). 
-- I , an investigator / journalist, want to be able to this analyzed information, so I do not have to keep running the functions.
-## News feed ingester module
-A entity-based module
-### User stories
-- I, an investigator / journalist , want to be able to ingest a large variety of file types and convert them into uploadable files. These uploadable files consist of json files that list the metadata in an accessible format, and a location that the data will be stored. 
-- I, an investigator / journalist, want to be able to create a custom metadata entry, if my file type is not supported by the functions that automatically ingest metadata.
-## My Demo and My Tests
-- Secure file uploader module [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/analyser/Uploader/README.md)
-- NLP analysis module [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/analyser/NLPAnalysis/README.md)
-- News feed ingester module [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/analyser/NewsIngester/README.md)
+## Three modules:
+- Secure file uploader module (entity-based)
+- NLP analysis module (procedure-based)
+- News feed ingester module (entity-based)
+## My demo 
+### My demo video
+- Google Drive link [here](https://drive.google.com/file/d/1Kc8j8ljy9FM-fWYw16gFejVrgXa7JaX9/view?usp=sharing)
+- preview gifs 
+
+![preview0](https://user-images.githubusercontent.com/77998865/114019864-8137b380-98a1-11eb-8522-a18ff64a5309.gif)
+
+![preview1](https://user-images.githubusercontent.com/77998865/114019889-8694fe00-98a1-11eb-95af-09e34001bf1f.gif)
+
+![preview2](https://user-images.githubusercontent.com/77998865/114019914-8eed3900-98a1-11eb-8b71-324ba022d119.gif)
+
+### My Demo and My Tests
+- Secure file uploader module [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/analyser/Uploader)
+- NLP analysis module [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/analyser/NLPAnalysis)
+- News feed ingester module [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/analyser/NewsIngester)
 - My tests [here](https://github.com/BUEC500C1/news-analyzer-HaoranZ99/tree/main/test)
-## install the .whl file and run the application
+## Install the .whl file and run the application
 Install the analyser-1.0.0-py3-none-any.whl file in the directory.
 
     $ pip install analyser-1.0.0-py3-none-any.whl
