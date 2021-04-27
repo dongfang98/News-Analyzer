@@ -1,5 +1,0 @@
-flask
-PyPDF2
-nltk
-rake_nltk
-newsapi-python
