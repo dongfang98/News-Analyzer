@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Articles{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('uploading.upload') }}">Upload</a>
+    <a class="action" href="{{ url_for('uploading.ingest') }}">Ingest</a>
+  {% endif %}
+{% endblock %}
+Upload
+{% block content %}
+  {% for article in articles %}
+    {% if g.user['id'] == article['uploader_id'] %}
+      <article class="post">
+        <header>
+          <div>
+            <h1>{{ article['title'] }}</h1>
+            <div class="about">by {{ article['username'] }} on {{ article['uploaded'].strftime('%Y-%m-%d') }}</div>
+          </div>
+          <a class="action" href="{{ url_for('uploading.update', id=article['id']) }}">Edit</a>
+        </header>
+        <div><b>The sentiment is {{ article['sentiment'] }}.</b></div>
+        <div><b>The keyword is {{ article['keyword'] }}.</b></div>
+        <p class="body">{{ article['body'] }}</p>
+      </article>
+      {% if not loop.last %}
+        <hr>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endblock %}
