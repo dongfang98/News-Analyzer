@@ -12,9 +12,12 @@ CREATE TABLE article (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   uploader_id INTEGER NOT NULL,
   uploaded TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  published TEXT NOT NULL,
+  author TEXT,
   title TEXT NOT NULL,
   body TEXT NOT NULL,
   sentiment TEXT NOT NULL,
+  article_url TEXT NOT NULL,
   keyword TEXT NOT NULL,
   FOREIGN KEY (uploader_id) REFERENCES user (id)
 );

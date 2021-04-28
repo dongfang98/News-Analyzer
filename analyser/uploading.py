@@ -19,11 +19,25 @@ bp = Blueprint('uploading', __name__)
 def index():
     db = get_db()
     articles = db.execute(
-        'SELECT a.id, title, body, sentiment, keyword, uploaded, uploader_id, username'
+        'SELECT a.id, title, body, sentiment, keyword, uploaded, uploader_id, article_url, username, published, author'
         ' FROM article a JOIN user u ON a.uploader_id = u.id'
         ' ORDER BY uploaded DESC'
     ).fetchall()
     return render_template('uploading/index.html', articles=articles)
+
+@bp.route('/show')
+def show(keyword=None, sentiment=None):
+    db = get_db()
+    
+    articles = db.execute(
+        'SELECT a.id, title, body, sentiment, keyword, uploaded, uploader_id, article_url, username, published, author'
+        ' FROM article a JOIN user u ON a.uploader_id = u.id'
+        ' WHERE sentiment = ? and keyword = ?'
+        ' ORDER BY uploaded DESC',
+        (sentiment, keyword)
+    ).fetchall()
+    length = len(articles)
+    return render_template('uploading/show.html', articles=articles, length = length)
 
 @bp.route('/upload', methods=('GET', 'POST'))
 @login_required
@@ -33,8 +47,12 @@ def upload():
         title = file.filename
         file.save(title)
         body = convert_from_PDF(title)
-        sen = get_sen(body) # get sentiment
+        sen = get_sen(body)  # get sentiment
         kwd = get_kwd(body)
+        url = ''  # set url '' to repesent not avilable
+        published = ''
+        author = ''
+
         error = None
 
         if not title:
@@ -45,9 +63,9 @@ def upload():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO article (title, body, uploader_id, sentiment, keyword)'
-                ' VALUES (?, ?, ?, ?, ?)',
-                (title, body, g.user['id'], sen, kwd)
+                'INSERT INTO article (title, body, uploader_id, sentiment, keyword, article_url, published, author)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                (title, body, g.user['id'], sen, kwd, url, published, author)
             )
             db.commit()
             return redirect(url_for('uploading.index'))
@@ -67,7 +85,10 @@ def ingest(keyword=None):
         for article in all_articles:
             title = article['title']
             body = article['content']
-            post(title, body, keyword)
+            url = article['url']
+            published = article['publishedAt']
+            author = article['author']
+            post(title, body, keyword, url, published, author)
 
         error = None
         if error is not None:
@@ -77,10 +98,14 @@ def ingest(keyword=None):
         
     return render_template('uploading/ingest.html')
 
-def post(title, body, keyword):
+def post(title, body, keyword, url, published, author):
     if request.method == 'POST':
         sen = get_sen(body)
         kwd = keyword
+        url = url
+        published = published[0:10]
+        author = author
+
         error = None
 
         if not title:
@@ -91,11 +116,31 @@ def post(title, body, keyword):
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO article (title, body, uploader_id, sentiment, keyword)'
-                ' VALUES (?, ?, ?, ?, ?)',
-                (title, body, g.user['id'], sen, kwd)
+                'INSERT INTO article (title, body, uploader_id, sentiment, keyword, article_url, published, author)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                (title, body, g.user['id'], sen, kwd, url, published, author)
             )
             db.commit()
+
+@bp.route('/search', methods=('GET', 'POST'))
+@login_required
+def search(keyword=None, sentiment=None):
+    if request.method == 'POST':
+        keyword = request.form['keyword']
+        sentiment = request.form['sentiment']
+        
+        error = None
+
+
+
+        if error is not None:
+            flash(error)
+        else:
+            return show(keyword, sentiment)
+            # return redirect(url_for('uploading.show'))
+            
+     
+    return render_template('uploading/search.html')
 
 def get_article(id, check_uploader=True):
     article = get_db().execute(

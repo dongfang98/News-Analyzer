@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Search{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    <div>Please type in the keyword.</div>
+    <input name="keyword" id="keyword" value="{{ request.form['keyword'] }}" required>
+    <div>Please choose the sentiment.</div>
+    <!-- <input name="sentiment" id="sentiment" value="{{ request.form['sentiment'] }}" required> -->
+    <select name="sentiment" id="sentiment">
+        <option style="display: none;"></option>
+        <option value="Positive">Positive</option>
+        <option value="Neutral">Neutral</option>
+        <option value="Negative">Negative</option>
+    </select>
+    <input type="submit" value="Search">
+  </form>
+{% endblock %}

@@ -10,5 +10,3 @@ A procedure-based module.
 	- Import `rake_nltk` to get the keywords for the text content of the article
 - Text sentiment and keyword display
 	- The text sentiment and keywords are displayed in the web page, so I do not have to keep running the functions
-
-![image](https://user-images.githubusercontent.com/77998865/112749092-a8b19500-8ff2-11eb-9df5-0bf34c658251.png)
