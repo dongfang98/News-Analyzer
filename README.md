@@ -1,8 +1,9 @@
 # News-Analyzer
-## Three modules:
-- Secure file uploader module (entity-based)
-- NLP analysis module (procedure-based)
-- News feed ingester module (entity-based)
+## Functionalities implemented:
+- Secure file uploader
+- NLP analysis
+- News feed ingester
+- News Search in db 
 ## My demo 
 ### My demo video
 - Google Drive link [here](https://drive.google.com/file/d/1Kc8j8ljy9FM-fWYw16gFejVrgXa7JaX9/view?usp=sharing)
