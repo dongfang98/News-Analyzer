@@ -1,8 +1,9 @@
 # News-Analyzer
 ## My demo 
 ### My demo video
-- Google Drive link [here](https://drive.google.com/file/d/1MYj2SxRJNxqYkmFEwSTnIoJqbfsVTire/view?usp=sharing)
+- Google Drive link [here](https://drive.google.com/file/d/1K2zYU1hM_pTNfTzlXijzDoNnr9M7l_-6/view?usp=sharingg)
 - preview gif
+
 ![demo_final_project 00_00_00-00_00_30](https://user-images.githubusercontent.com/77998865/117134750-8cb2c780-add8-11eb-879d-96bad540002b.gif)
 
 ## Functionalities implemented:
