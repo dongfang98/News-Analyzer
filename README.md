@@ -1,4 +1,4 @@
-# News-Analyzer
+# Final Project: News Analyzer
 ## My demo 
 ### My demo video
 - Google Drive link [here](https://drive.google.com/file/d/1K2zYU1hM_pTNfTzlXijzDoNnr9M7l_-6/view?usp=sharingg)
