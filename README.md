@@ -2,9 +2,8 @@
 ## My demo 
 ### My demo video
 - Google Drive link [here](https://drive.google.com/file/d/1MYj2SxRJNxqYkmFEwSTnIoJqbfsVTire/view?usp=sharing)
-- preview gif 
-
-![preview0](https://user-images.githubusercontent.com/77998865/114019864-8137b380-98a1-11eb-8522-a18ff64a5309.gif)
+- preview gif
+![demo_final_project 00_00_00-00_00_30](https://user-images.githubusercontent.com/77998865/117134750-8cb2c780-add8-11eb-879d-96bad540002b.gif)
 
 ## Functionalities implemented:
 - Secure file upload
