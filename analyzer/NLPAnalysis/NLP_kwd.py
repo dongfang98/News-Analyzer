@@ -1,15 +1,3 @@
-from nltk.util import re_show
-from rake_nltk import Rake
-
-r = Rake()
-# def get_kwd(my_text):
-
-#     r.extract_keywords_from_text(my_text)
-#     res_scores = r.get_ranked_phrases_with_scores()
-#     if len(res_scores) < 1:
-#         return ''
-#     res = res_scores[0][1]  #get keyword phrases ranked highest
-#     return res
 def get_kwd(txt):
     txt = txt.replace(" ",',')
     txt = txt.replace(",,",',')
@@ -39,3 +27,30 @@ def get_kwd(txt):
         if HighKey == None:
             HighKey = txt[0]
     return HighKey
+
+def find_keyword(txt):
+    "Find keyword which pargraghs it's in"
+    keyword = get_kwd(txt)
+    txt = txt.replace(" ", ',')
+    txt = txt.replace(",,", ',')
+    txt = txt.split("\n")
+    para_dict = {}
+    para_num = 1
+    for para in txt:
+        if para != '':
+            words = para.split(",")
+            para_key = False
+            if keyword in words:
+                para_key = True
+            para_dict[para_num] = para_key
+            para_num = para_num + 1
+    para_list = ''
+    i = 0
+    for i in range(len(para_dict)):
+        if para_dict[i + 1] == True:
+            para_list += str(i + 1)
+            if i > 0 and i is not len(para_dict) - 1:
+                para_list += ', '
+    para_list = para_list[0:-2]
+    
+    return para_list

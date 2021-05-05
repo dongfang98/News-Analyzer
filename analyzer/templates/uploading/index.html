@@ -22,7 +22,12 @@ Upload
               <div class="about">author: {{ article['author'] }}, published at: {{ article['published'] }}</div>
             {% endif %}
             <div class="about">uploaded by {{ article['username'] }} on {{ article['uploaded'].strftime('%Y-%m-%d') }}</div>
-            <div class="info">The sentiment is {{ article['sentiment'] }}.&nbsp&nbspThe keyword is {{ article['keyword'] }}.</div>
+            <div class="info">The sentiment is {{ article['sentiment'] }}.</div>
+            {% if article['para_list'] != "" %}
+              <div class="info">The keyword is {{ article['keyword'] }}.&nbsp&nbspThe keyword is in paragraph {{ article['para_list'] }}. </div>
+            {% else %}
+              <div class="info">The keyword is {{ article['keyword'] }}. </div>
+            {% endif %}
           </div>
           <a class="action" href="{{ url_for('uploading.update', id=article['id']) }}">Edit</a>
         </header>

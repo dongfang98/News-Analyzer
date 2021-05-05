@@ -18,7 +18,8 @@ Search Results
               <div class="about">author: {{ article['author'] }}, published at: {{ article['published'] }}</div>
             {% endif %}
             <div class="about">uploaded by {{ article['username'] }} on {{ article['uploaded'].strftime('%Y-%m-%d') }}</div>
-            <div class="info">The sentiment is {{ article['sentiment'] }}.&nbsp&nbspThe keyword is {{ article['keyword'] }}.</div>
+            <div class="info">The sentiment is {{ article['sentiment'] }}.</div>
+            <div class="info">The keyword is {{ article['keyword'] }}.&nbsp&nbspThe keyword is in paragraph ... </div>
           </div>
         </header>
         <p class="body">{{ article['body'] }}</p>

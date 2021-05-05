@@ -1,8 +1,8 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - My app</title>
+<title>{% block title %}{% endblock %} - News Analyzer </title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1>News Analyser</h1>
+  <h1>News Analyzer</h1>
   <ul>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>

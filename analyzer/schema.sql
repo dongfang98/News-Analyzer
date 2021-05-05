@@ -19,5 +19,6 @@ CREATE TABLE article (
   sentiment TEXT NOT NULL,
   article_url TEXT NOT NULL,
   keyword TEXT NOT NULL,
+  para_list TEXT NOT NULL,
   FOREIGN KEY (uploader_id) REFERENCES user (id)
 );

@@ -5,13 +5,13 @@ from flask import (
 from werkzeug import exceptions
 from werkzeug.exceptions import abort
 
-from analyser.auth import login_required
-from analyser.db import get_db
+from analyzer.auth import login_required
+from analyzer.db import get_db
 
-from analyser.Uploader.PDFUploader import convert_from_PDF
-from analyser.NLPAnalysis.NLPAnalysis import get_sen
-from analyser.NLPAnalysis.NLP_kwd import get_kwd
-from analyser.NewsIngester.News_Ingester import get_all
+from analyzer.Uploader.PDFUploader import convert_from_PDF
+from analyzer.NLPAnalysis.NLPAnalysis import get_sen
+from analyzer.NLPAnalysis.NLP_kwd import get_kwd, find_keyword
+from analyzer.NewsIngester.News_Ingester import get_all
 
 bp = Blueprint('uploading', __name__)
 
@@ -19,7 +19,7 @@ bp = Blueprint('uploading', __name__)
 def index():
     db = get_db()
     articles = db.execute(
-        'SELECT a.id, title, body, sentiment, keyword, uploaded, uploader_id, article_url, username, published, author'
+        'SELECT a.id, title, body, sentiment, keyword, uploaded, uploader_id, article_url, username, published, author, para_list'
         ' FROM article a JOIN user u ON a.uploader_id = u.id'
         ' ORDER BY uploaded DESC'
     ).fetchall()
@@ -52,7 +52,9 @@ def upload():
         url = ''  # set url '' to repesent not avilable
         published = ''
         author = ''
-
+        # add here
+        para_list = find_keyword(body)
+        
         error = None
 
         if not title:
@@ -63,12 +65,13 @@ def upload():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO article (title, body, uploader_id, sentiment, keyword, article_url, published, author)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                (title, body, g.user['id'], sen, kwd, url, published, author)
+                'INSERT INTO article (title, body, uploader_id, sentiment, keyword, article_url, published, author, para_list)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (title, body, g.user['id'], sen, kwd, url, published, author, para_list)
             )
             db.commit()
             return redirect(url_for('uploading.index'))
+
 
     return render_template('uploading/upload.html')
 
@@ -105,6 +108,7 @@ def post(title, body, keyword, url, published, author):
         url = url
         published = published[0:10]
         author = author
+        para_list = find_keyword(body)
 
         error = None
 
@@ -116,9 +120,9 @@ def post(title, body, keyword, url, published, author):
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO article (title, body, uploader_id, sentiment, keyword, article_url, published, author)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                (title, body, g.user['id'], sen, kwd, url, published, author)
+                'INSERT INTO article (title, body, uploader_id, sentiment, keyword, article_url, published, author, para_list)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (title, body, g.user['id'], sen, kwd, url, published, author, para_list)
             )
             db.commit()
 
@@ -168,6 +172,8 @@ def update(id):
         body = request.form['body']
         sen = get_sen(body) # update sentiment
         kwd = get_kwd(body)
+        para_list = find_keyword(body)
+        print (f"para_list = {para_list}")
         error = None
 
         if not title:
@@ -178,9 +184,9 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE article SET title = ?, body = ?, sentiment = ?, keyword = ?'
+                'UPDATE article SET title = ?, body = ?, sentiment = ?, keyword = ?, para_list = ?'
                 ' WHERE id = ?',
-                (title, body, sen, kwd, id)
+                (title, body, sen, kwd, para_list, id)
             )
             db.commit()
             return redirect(url_for('uploading.index'))
